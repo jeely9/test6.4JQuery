@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/home.css"/>
+</head>
+<body>
+    <div class="contain">
+        <div id="homeMap" class="homeMap"></div>
+        <div class="header clearfix">
+            <p class="headerL left"><b>自动化监测系统</b><span>2018-06-15</span><span>16:49</span></p>
+            <p class="headerR right clearfix">
+                <span class="left"><img src="img/user.png" alt="用户"><span class="userName">管理员</span>您好</span>
+                <span class="tool">
+                    <img src="img/cc-bell-o.png" alt="提示"><img src="img/message.png" alt="消息">
+                    <img src="img/fu.png" alt="换肤">
+                </span>
+            </p>
+        </div>
+        <div class="main">
+            <div class="keySearch">
+                <!--<div id="r-result">请输入:<input type="text" id="suggestId" size="20" value="关键字" style="width:150px;" /></div>-->
+                <!--<div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>-->
+                <input class="search_text" id="searchKey" type="text" placeholder="请输入搜索关键字"/>
+                <ul class="keywords_list" id="testList"></ul>
+            </div>
+            <div class="tabList">
+                <p>某某项目</p>
+                <ul id="modalTab" class="nav nav-tabs">
+                    <li class="active"><a href="#itemMessage" data-toggle="tab">项目信息</a></li>
+                    <li><a href="#monitor" data-toggle="tab">监测</a></li>
+                    <li><a href="#geology" data-toggle="tab">地质</a></li>
+                    <li><a href="#structure" data-toggle="tab">结构</a></li>
+                </ul>
+                <div id="modalContent" class="tab-content">
+                    <!--项目信息-->
+                    <div class="tab-pane fade in active" id="itemMessage">
+                        <div class="messageBox">
+                            <form class="form-horizontal formBox" role="form">
+                                <div class="form-group">
+                                    <label for="firstName" class="col-sm-3 control-label">项目名称</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="firstName">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address" class="col-sm-3 control-label">工程地址</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="address">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="content" class="col-sm-3 control-label">合同额</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="content">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">合同工期</label>
+                                    <div class="col-sm-9">
+                                        <input id="numPre" type="text" runat="server" value=""  onfocus="WdatePicker({skin:'default',dateFmt:'yyyy年MM月dd日'})" class="Wdate left" style=" width:145px;height:32px;margin-left:4px;border:1px solid #ccc;border-radius:4px"/>
+                                        <span class="left" style="margin-left: 2px;">-</span>
+                                        <input id="numNext" type="text" runat="server" value="" onfocus="WdatePicker({skin:'default',dateFmt:'yyyy年MM月dd日'})" class="Wdate left" style=" width:145px;height:32px;margin-left:4px;border:1px solid #ccc;border-radius:4px">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button class="btn"><a href="main.html">查看详情</a></button>
+                                        <button type="submit" class="btn btn-default">保存</button>
+                                        <button type="submit" class="btn btn-default" data-dismiss="modal">取消</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--监测-->
+                    <div class="tab-pane fade" id="monitor">
+                        对方感受过
+                    </div>
+                    <!--地质-->
+                    <div class="tab-pane fade" id="geology">
+                                    变更公告
+                    </div>
+                    <!--结构-->
+                    <div class="tab-pane fade" id="structure">
+                        按法定法规
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/My97DatePicker/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://api.map.baidu.com/api?v=2.0&ak=GHfU0QLGld6ezlyAv7ZEsmNRpZIRXKwM"></script>
+<script src="js/echarts.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bmap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/url.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/comment/projectList.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/comment/comment.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/homeMap.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/page/home.js" type="text/javascript" charset="utf-8"></script>
+</html>

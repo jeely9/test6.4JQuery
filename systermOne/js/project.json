@@ -1,0 +1,45 @@
+[
+        {
+            "id": 1,
+            "initial": "ad",
+            "keyword": "项目一",
+            "geo": [
+                121.477594,
+                31.239078
+            ]
+        },
+        {"id": 2, "initial": "ada4l", "keyword": "项目二", "geo":[121.466095, 31.233644]},
+        {
+            "id": 3, "initial": "ada6l", "keyword": "奥迪A6L"
+        },
+        {
+            "id": 4, "initial": "adq5", "keyword": "奥迪Q5"},
+        {"id": 5, "initial": "ada3", "keyword": "奥迪A3"
+        },
+        {
+            "id": 6, "initial": "adq7", "keyword": "奥迪Q7(进口)"
+        },
+        {
+            "id": 7, "initial": "ada8", "keyword": "奥迪A8L(进口)"},
+        {
+            "id": 8, "initial": "bm", "keyword": "宝马"
+        },
+        {
+            "id": 9, "initial": "bm5x", "keyword": "宝马5系"},
+        {"id": 10, "initial": "bm7x", "keyword": "宝马7系"
+        },
+        {
+            "id": 11, "initial": "bt", "keyword": "本田"
+        },
+        {
+            "id": 12, "initial": "bqsbx25", "keyword": "北汽绅宝 X25"},
+        {
+            "id": 13, "initial": "bqsbx35", "keyword": "北汽绅宝X35"
+        },
+        {
+            "id": 14, "initial": "bqsbx55", "keyword": "北汽绅宝X55"
+        }
+
+]
+
+
