@@ -11,6 +11,7 @@
             $(thisItem).find("li").bind("click", function () {
                 var value=$(this).text();
                 $("#searchKey").val(value);
+                $("#programName").html(value);
                 $('.keywords_list').hide();
                 var geo = $(this).next("span").text();
                 var arr = geo.split(",");
@@ -19,6 +20,7 @@
                     map.addOverlay(marker);
                     marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
                 }
+                $(".tabList").css("display","block");
             });
         });
     };
