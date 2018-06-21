@@ -1,0 +1,15 @@
+.box{
+    background: url("../img/loginbg.png") 50% 50%;
+    background-size: cover;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.title{
+    position: absolute;
+    left: 36%;
+    top: 32%;
+    font-size: 22px;
+    color: #28ffd9;
+}

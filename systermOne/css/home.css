@@ -16,7 +16,7 @@
     top: 20px;
     left: 72px;
     height: 62px;
-    z-index: 999;
+    z-index: 9;
 }
 .headerL{
     width: 428px;
@@ -45,6 +45,24 @@
 }
 .tool{
     margin-left: 100px;
+    position: relative;
+}
+.skin{
+    position: absolute;
+    top: 38px;
+    left: 47px;
+    z-index: 99;
+    width: 60px;
+    height: 40px;
+    font-size: 12px;
+    background: #e6d0f8;
+    border-radius: 6px;
+    display: none;
+}
+.skin li{
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
 }
 .tool b{
     margin-left: 10px;
@@ -70,7 +88,7 @@
     position: absolute;
     left: 70px;
     top: 100px;
-    z-index: 999;
+    z-index: 9;
 }
 .search_text{
     width: 250px;
@@ -125,7 +143,7 @@
     height: 322px;
     border-radius: 10px;
     background: #fff;
-    z-index: 999;
+    z-index: 9;
 }
 .listHeader{
     font-size: 14px;
@@ -210,4 +228,34 @@
     background: -moz-linear-gradient(top right, #7d82f9, #b984ff); /* Firefox 3.6 - 15 */
     background: linear-gradient(to top right, #7d82f9 , #b984ff); /* 标准的语法 */
 }
-
+.boxRight{
+    position: absolute;
+    right: 106px;
+    top: 100px;
+    z-index: 999;
+    width: 360px;
+    height: auto;
+}
+.jobList{
+    height: 140px;
+    background: #fff;
+    border-radius: 10px;
+}
+.jobList .table>thead>tr>th{
+    border-bottom: none;
+    text-align: center;
+    cursor: pointer;
+}
+.jobList .table>thead>tr>th:hover{
+    color: #5144ff;
+}
+.jobList .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+    border: none;
+    text-align: center;
+}
+.circleList ul{
+    height: 194px;
+    background: #fff;
+    border-radius: 10px;
+    margin-top: 14px;
+}

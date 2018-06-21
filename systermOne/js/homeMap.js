@@ -4,7 +4,152 @@ map.enableScrollWheelZoom(true);                                //开启鼠标�
 
 
 
-
+function mapStyle(map){
+    var myStyleJSon = [
+        {
+            "featureType": "water",
+            "elementType": "all",
+            "stylers": {
+                "color": "#021019"
+            }
+        },
+        {
+            "featureType": "highway",
+            "elementType": "geometry.fill",
+            "stylers": {
+                "color": "#000000"
+            }
+        },
+        {
+            "featureType": "highway",
+            "elementType": "geometry.stroke",
+            "stylers": {
+                "color": "#147a92"
+            }
+        },
+        {
+            "featureType": "arterial",
+            "elementType": "geometry.fill",
+            "stylers": {
+                "color": "#000000"
+            }
+        },
+        {
+            "featureType": "arterial",
+            "elementType": "geometry.stroke",
+            "stylers": {
+                "color": "#0b3d51"
+            }
+        },
+        {
+            "featureType": "local",
+            "elementType": "geometry",
+            "stylers": {
+                "color": "#000000"
+            }
+        },
+        {
+            "featureType": "land",
+            "elementType": "all",
+            "stylers": {
+                "color": "#08304b"
+            }
+        },
+        {
+            "featureType": "railway",
+            "elementType": "geometry.fill",
+            "stylers": {
+                "color": "#000000"
+            }
+        },
+        {
+            "featureType": "railway",
+            "elementType": "geometry.stroke",
+            "stylers": {
+                "color": "#08304b"
+            }
+        },
+        {
+            "featureType": "subway",
+            "elementType": "geometry",
+            "stylers": {
+                "lightness": -70
+            }
+        },
+        {
+            "featureType": "building",
+            "elementType": "geometry.fill",
+            "stylers": {
+                "color": "#000000"
+            }
+        },
+        {
+            "featureType": "all",
+            "elementType": "labels.text.fill",
+            "stylers": {
+                "color": "#857f7f"
+            }
+        },
+        {
+            "featureType": "all",
+            "elementType": "labels.text.stroke",
+            "stylers": {
+                "color": "#000000"
+            }
+        },
+        {
+            "featureType": "building",
+            "elementType": "geometry",
+            "stylers": {
+                "color": "#022338"
+            }
+        },
+        {
+            "featureType": "green",
+            "elementType": "geometry",
+            "stylers": {
+                "color": "#062032"
+            }
+        },
+        {
+            "featureType": "boundary",
+            "elementType": "all",
+            "stylers": {
+                "color": "#1e1c1c"
+            }
+        },
+        {
+            "featureType": "manmade",
+            "elementType": "geometry",
+            "stylers": {
+                "color": "#022338"
+            }
+        },
+        {
+            "featureType": "poi",
+            "elementType": "all",
+            "stylers": {
+                "visibility": "off"
+            }
+        },
+        {
+            "featureType": "all",
+            "elementType": "labels.icon",
+            "stylers": {
+                "visibility": "off"
+            }
+        },
+        {
+            "featureType": "all",
+            "elementType": "labels.text.fill",
+            "stylers": {
+                "color": "#2da0c6",
+                "visibility": "on"
+            }
+        }
+    ];
+    map.setMapStyle({styleJson: myStyleJSon });
+}
 function infoWindow(map){
     var data_info = [
         [121.477594, 31.239078,"地址：人民广场"],
@@ -61,5 +206,5 @@ $(document).ready(function(){
     mapControl(map);                                               //地图控件
     mapClick(map);                                                 //地图点击事件
     // infoWindow(map);                                            //地图标注和窗口信息
-
+    // mapStyle(map);                                                 //地图换肤颜色设置
 });
