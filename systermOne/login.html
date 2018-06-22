@@ -9,11 +9,42 @@
 </head>
 <body>
     <div class="box">
-        <p class="title">自动化检测系统</p>
+        <div class="center clearfix">
+            <p class="title left">自动化检测系统</p>
+            <div class="loginNav left">
+                <ul id="modalTab" class="nav nav-tabs">
+                    <li class="active"><a href="#pswLogin" data-toggle="tab">密码登录</a></li>
+                    <li><a href="#printLogin" data-toggle="tab">扫码登录</a></li>
+                </ul>
+                <div id="modalContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="pswLogin">
+                        <p class="intext"><input id="mail" type="text" class="num" placeholder="管理员"/></p>
+                        <p class="inpsw">
+                            <input id="psw" type="password" class="psw psw_dd" placeholder="请输入密码"/>
+                            <input id="psw2" type="text" class="psw psw_wz" style="display:none;" placeholder="请输入密码"/>
+                            <a class="eyes_box right" data-show="1" href="javascript:void(0);"><img src="img/suo.png"/></a>
+                        </p>
+                        <div class="info">
+                            <input type="radio" name="radio" id="rmbUser" value="" class="left"/>
+                            <span class="rember left">记住密码</span>
+                            <a href="#" class="forg right">忘记密码?</a>
+                        </div>
+                        <input type="submit" id="login" value="登录" class="login"/>
+                    </div>
+                    <div class="tab-pane fade" id="printLogin">
+                        <div class="img">
+                            <img src="img/erweima.png" alt="二维码">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </body>
 <script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/url.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/page/login.js" type="text/javascript" charset="utf-8"></script>
 </html>

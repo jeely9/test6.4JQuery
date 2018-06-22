@@ -1,15 +1,131 @@
 .box{
     background: url("../img/loginbg.png") 50% 50%;
     background-size: cover;
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.center{
+    width: 460px;
+    height: 270px;
 }
 .title{
-    position: absolute;
-    left: 36%;
-    top: 32%;
-    font-size: 22px;
+    font-size: 20px;
     color: #28ffd9;
+    width: 180px;
+    height: 42px;
+}
+.loginNav{
+    border: 2px solid #26d0fa;
+    border-radius: 6px;
+    width: 257px;
+    height: 270px;
+    background-color: rgba(37,72,115,0.5);
+    padding: 12px 20px;
+}
+#modalTab{
+    border-bottom: none;
+    height: 28px;
+    line-height: 28px;
+}
+#modalTab li{
+    width: 100px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+}
+#modalTab li a{
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    /*border: none;*/
+    /*color: #fff;*/
+}
+#modalTab .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #24a0af;
+    cursor: default;
+    background: none;
+    /*background-color: #fff;*/
+    border-bottom: 4px solid #26ffcd;
+    font-weight: 500;
+    border-right: none;
+    border-left: none;
+    padding: 0;
+    /*border-bottom-color: transparent;*/
+}
+#mail,#psw{
+    width: 100%;
+    height: 40px;
+    margin-top: 14px;
+    border: 1px solid #305d8b;
+    border-radius: 20px;
+    background: none;
+    color: #fff;
+}
+#mail input:focus{
+    border-radius: 20px;
+    color: #fff;
+}
+#rmbUser{
+    background: #397db3;
+}
+.info{
+    height: 44px;
+}
+input::-webkit-input-placeholder{
+    color: #fff;
+    font-size: 10px;
+}
+.eyes_box{
+    cursor: pointer;
+    display: inline-block;
+    margin-top: -32px;
+    margin-right: 10px;
+}
+#pswLogin input:focus{
+    outline: none;
+    border: 2px solid #26d0fa;
+}
+#mail{
+    background: url("../img/users.png") no-repeat 186px center;
+}
+.rember,.forg{
+    font-size: 14px;
+    color: #fff;
+    border-radius: 20px;
+}
+.login{
+    width: 100%;
+    height: 42px;
+    line-height: 42px;
+    color: #fff;
+    background: -webkit-linear-gradient(left bottom, #31ccff , #624bff); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top right, #31ccff, #624bff); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top right, #31ccff, #624bff); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to top right, #31ccff , #624bff); /* 标准的语法 */
+    border: none;
+    border-radius: 20px;
+}
+#printLogin{
+    width: 100%;
+    height: 100%;
+}
+.img{
+    width: 146px;
+    height: 146px;
+    background: #fff;
+    border-radius: 6px;
+    margin-left: 16%;
+    margin-top: 14%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

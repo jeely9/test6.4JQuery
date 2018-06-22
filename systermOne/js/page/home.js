@@ -75,7 +75,12 @@ window.onresize = function() {
 
 
 
-
+function outClick(){
+    $("#out").click(function(){
+        window.location.href="login.html";
+        $("#userName").html("");
+    })
+}
 function keywordSearch(){
     $("#searchKey").keyup(function(){
         var searchKey = $(this).val();
@@ -99,6 +104,15 @@ function keywordSearch(){
         $(".keywords_list").css("display","block");
     })
 }
+function userName(){
+    $.getUrlParam = function (name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    };
+    var userName = $.getUrlParam('userName');
+    $("#userName").html(userName);
+}
 function nowData(){
     var myDate = new Date();
     var nowDay = myDate.toLocaleDateString();                         //获取当前日期
@@ -116,6 +130,8 @@ function programList(){
 }
 $(function(){
     nowData();                                         //当前日期
+    userName();                                        //保存用户名
     keywordSearch();                                   //关键字搜索
     programList();
+    outClick();                                         //退出
 });
