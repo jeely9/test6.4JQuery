@@ -9,7 +9,10 @@
             var thisItem=$(this);
             map.clearOverlays();
             $(thisItem).find("li").bind("click", function () {
-                clickEvent();
+                var value=$(this).text();
+                $("#searchKey").val(value);
+                $("#programName").html(value);
+                $('.keywords_list').hide();
                 $(".tabList").css("display","block");
             });
         });
@@ -42,20 +45,22 @@
             });
         });
         return this
-    }
-    function clickEvent(){
-        var value=$(this).text();
-        $("#searchKey").val(value);
-        $("#programName").html(value);
-        $('.keywords_list').hide();
-        var geo = $(this).next("span").text();
-        var arr = geo.split(",");
-        for(var i=0;i<arr.length;i++){
-            var marker = new BMap.Marker(new BMap.Point(arr[0],arr[1]));
-            map.addOverlay(marker);
-            marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-        }
-    }
+    };
+    // function clickEvent(value){
+    //     $("#searchKey").val(value);
+    //     $("#programName").html(value);
+    //     $('.keywords_list').hide();
+    //     console.log($(this).html());
+    //     var geo = $(this).next("span").text();
+    //     console.log(geo);
+    //     var arr = geo.split(",");
+    //     console.log(arr);
+    //     for(var i=0;i<arr.length;i++){
+    //         var marker = new BMap.Marker(new BMap.Point(arr[0],arr[1]));
+    //         map.addOverlay(marker);
+    //         marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+    //     }
+    // }
 })(jQuery, window, document);
 
 

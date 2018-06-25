@@ -154,8 +154,6 @@ function infoWindow(map){
     var data_info = [
         [121.477594, 31.239078,"地址：人民广场"],
         [121.466095, 31.233644,"地址：南京西路"],
-        [121.465305, 31.246673,"地址：汉中路"],
-        [121.508855, 31.243586,"地址：陆家嘴"]
     ];
     var opts = {
         width : 250,     // 信息窗口宽度
@@ -205,6 +203,6 @@ function mapControl(map){
 $(document).ready(function(){
     mapControl(map);                                               //地图控件
     mapClick(map);                                                 //地图点击事件
-    // infoWindow(map);                                            //地图标注和窗口信息
+    infoWindow(map);                                                //地图标注和窗口信息
     // mapStyle(map);                                                 //地图换肤颜色设置
 });

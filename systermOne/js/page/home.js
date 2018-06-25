@@ -98,10 +98,31 @@ function keywordSearch(){
                     }
                 }
                 $(".keywords_list").html(arr).show();
-                $("body").setItemHeight();                        //地图上高亮显示
+                $("#testList").setItemHeight();                        //地图上高亮显示
+                $(".keyList").click(function(){
+                    var geo = $(this).next("span").text();
+                    var arr = geo.split(",");
+                    for(var i=0;i<arr.length;i++){
+                        var marker = new BMap.Marker(new BMap.Point(arr[0],arr[1]));
+                        map.addOverlay(marker);
+                        // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                    }
+                    var title = $(this).html();
+                    var sContent ="";
+                    sContent +=    "<div class='infoBox'><h4 class='infoTitle'>"+ title +"</h4>" +
+                        "<p class='process'>工程进度:</p>" +"<p class='mointor'>监测状态:</p>"+
+                        "</div>";
+                    var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
+                    marker.addEventListener("click", function(){
+                        this.openInfoWindow(infoWindow);
+                        //图片加载完毕重绘infowindow
+                    });
+
+                })
             }
         });
         $(".keywords_list").css("display","block");
+
     })
 }
 function userName(){
