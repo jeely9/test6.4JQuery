@@ -18,6 +18,7 @@ function clickRight(map){
         marker.addContextMenu(markerMenu);
         function EventMarker(map){
             console.log(map);
+            window.location.href="main.html";
         }
     }
 }

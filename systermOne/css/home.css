@@ -1,3 +1,9 @@
+.titleGradient{
+    background: -webkit-linear-gradient(left bottom, #7d82f9 , #b984ff); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top right, #7d82f9, #b984ff); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top right, #7d82f9, #b984ff); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to top right, #7d82f9 , #b984ff); /* 标准的语法 */
+}
 .contain{
     width: 100%;
     height: 100%;
@@ -285,4 +291,67 @@
 }
 .BMap_contextMenu{
     border-radius: 20px;
+}
+/*项目配置弹出框*/
+.modal-backdrop{
+    position: relative;
+}
+.modal-content{
+    width: 322px;
+    height: auto;
+}
+.modal-header{
+    width: 100%;
+    height: 40px;
+    color: #fff;
+}
+.modal-title{
+    font-size: 14px;
+    line-height: 1;
+}
+.form-group{
+    width: 100%;
+    height: 36px;
+}
+.form-control{
+    background: #f2f2f2;
+    border-radius: 20px;
+}
+.addPosition{
+    height: 99px;
+}
+.addPosition span p{
+    text-align: center;
+}
+.addPosition span input{
+    width: 120px;
+    margin-bottom: 6px;
+}
+.mapChoose{
+    margin-left: 28px;
+    width: 90px;
+    height: 70px;
+    text-align: center;
+    line-height: 70px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 6px;
+}
+.mapChoose button{
+    display: inline-block;
+}
+.modalList table{
+    background: #f2f2f2;
+    border-radius: 6px;
+    width: 290px;
+    height: 190px;
+    overflow: auto;
+}
+.modal-footer{
+    border-top: none;
+
+}
+.modal-footer button{
+    width: 80px;
+    height: 34px;
 }
