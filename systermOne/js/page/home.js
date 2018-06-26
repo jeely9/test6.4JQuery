@@ -107,6 +107,7 @@ function keywordSearch(){
                         map.addOverlay(marker);
                         // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
                     }
+                    //创建信息窗口
                     var title = $(this).html();
                     var sContent ="";
                     sContent +=    "<div class='infoBox'><h4 class='infoTitle'>"+ title +"</h4>" +
@@ -117,7 +118,16 @@ function keywordSearch(){
                         this.openInfoWindow(infoWindow);
                         //图片加载完毕重绘infowindow
                     });
-
+                    //右键菜单事件
+                    var markerMenu=new BMap.ContextMenu();
+                    marker.addEventListener("rightclick",function(){
+                        this.addContextMenu(markerMenu);//给标记添加右键菜单
+                    });
+                    markerMenu.addItem(new BMap.MenuItem('进入项目',EventMarker.bind(map)));
+                    marker.addContextMenu(markerMenu);
+                    function EventMarker(map){
+                        console.log(map);
+                    }
                 })
             }
         });
@@ -125,6 +135,7 @@ function keywordSearch(){
 
     })
 }
+
 function userName(){
     $.getUrlParam = function (name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");

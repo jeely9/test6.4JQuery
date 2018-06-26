@@ -283,3 +283,6 @@
     height: 30px;
     line-height: 30px;
 }
+.BMap_contextMenu{
+    border-radius: 20px;
+}
