@@ -94,7 +94,7 @@ function keywordSearch(){
                 var arr = [];
                 for (var i = 0, len = data.length; i < len; i++) {
                     if (searchKey != "" && (data[i].initial.search(reg) != -1 || data[i].keyword.search(reg) != -1)) {
-                        arr.push("<li class='keyList' id='keyList'>" + data[i].keyword + "</li><span style='display: none;'>"+data[i].geo+"</span>");
+                        arr.push("<li class='keyList' id='keyList'>" + data[i].keyword + "<img class='peizhi' data-toggle='modal' data-target='#configModal' src='../../../../testOne/systermOne/img/peizhi.png' alt=''></li><span style='display: none;'>"+data[i].geo+"</span>");
                     }
                 }
                 $(".keywords_list").html(arr).show();
@@ -135,7 +135,6 @@ function keywordSearch(){
 
     })
 }
-
 function userName(){
     $.getUrlParam = function (name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");

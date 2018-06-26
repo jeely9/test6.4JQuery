@@ -12,6 +12,13 @@
     border: 1px solid #eee;
     position: relative;
 }
+.iframeContain{
+    width: 90%;
+    position: absolute;
+    top: 20px;
+    left: 72px;
+    /*z-index: 9;*/
+}
 #homeMap{
     width: 100%;
     height: 900px;
@@ -136,7 +143,11 @@
     font-size: 14px;
     color: #666666;
     margin-left: 14px;
-    background: url("../img/peizhi.png") no-repeat right center;
+    /*background: url("../img/peizhi.png") no-repeat right center;*/
+}
+.peizhi{
+    float: right;
+    cursor: pointer;
 }
 .keywords_list li:hover{
     color: #7168ff;
@@ -309,7 +320,7 @@
     font-size: 14px;
     line-height: 1;
 }
-.form-group{
+.form-group1{
     width: 100%;
     height: 36px;
 }
