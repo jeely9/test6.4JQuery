@@ -1,0 +1,21 @@
+.badge{
+    vertical-align: super;
+    background: #e55050;
+    padding: 2px 4px;
+}
+.messageBadge{
+    background: #00c78e;
+}
+.detailList{
+    position: absolute;
+    left: 0;
+    top: 490px;
+}
+.photoBox{
+    position: absolute;
+    right: 0;
+    top: 32px;
+    z-index: 999;
+    width: 360px;
+    height: auto;
+}

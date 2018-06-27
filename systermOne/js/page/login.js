@@ -38,7 +38,7 @@ function login(){
         // var passwd = $.md5(password);
         // console.log(passwd);
         if(userName=="admin" & password=="123456"){
-            window.location.href="home.html?userName="+userName;
+            window.location.href="index.html?userName="+userName;
         }else{
             return false;
         }
@@ -57,7 +57,7 @@ function login(){
         //             return false;
         //         }else{
         //             var userName = $("#mail").val();
-        //             window.location.href="home.html?userName="+userName;
+        //             window.location.href="home1.html?userName="+userName;
         //         }
         //     },
         //     error: function(data){
