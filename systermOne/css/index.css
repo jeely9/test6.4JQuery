@@ -48,6 +48,14 @@
     font-size: 20px;
     color: #333333;
     margin-right: 20px;
+
+}
+@font-face {
+    font-family: 'DIGIFAW';
+    src: url('DIGIFAW.TTF');
+}
+.nowDay,.nowTime {
+    font-family: 'DIGIFAW';
 }
 .headerR{
     width: 362px;
