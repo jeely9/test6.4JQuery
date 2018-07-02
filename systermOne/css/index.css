@@ -22,7 +22,8 @@
 }
 #homeMap{
     width: 100%;
-    height: 950px;
+    height: 100%;
+    min-height: 950px;
 }
 .header{
     width: 94%;
@@ -108,7 +109,11 @@
     margin-top: 6px;
     position: relative;
 }
-
+.keySearchBox{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
 .keySearch{
     position: absolute;
     top: 9%;
@@ -120,9 +125,51 @@
     width: 250px;
     height: 40px;
     line-height: 40px;
-    text-align: center;
+    text-align: left;
     border-radius: 10px;
     border: none;
+    outline: none;
+    display: inline-block;
+}
+.search_text:focus{
+    text-align: left;
+    border: #fff;
+}
+::-webkit-input-placeholder
+{
+    text-align: left;
+}
+:-ms-input-placeholder
+{
+    text-align: left;
+}
+:-moz-placeholder
+{
+    text-align: left;
+}
+::-moz-placeholder
+{
+    text-align: left;
+}
+.searchTool{
+    position: absolute;
+    right: 44px;
+    bottom: 11px;
+    width: 76px;
+    height: 18px;
+}
+.searchTool span{
+    width: 36px;
+    height: 18px;
+    cursor: pointer;
+    display: inline-block;
+}
+.listDown{
+    background: url("../img/downlist.png") no-repeat center;
+    border-right: 2px solid #999999;
+}
+.listSearch{
+    background: url("../img/search.png") no-repeat center;
 }
 .addProgram{
     width: 40px;
@@ -148,10 +195,11 @@
     margin-top: 12px;
     padding: 20px 14px;
     display: none;
+    overflow-y: auto;
 }
 .keyList{
     cursor: pointer;
-    width: 184px;
+    width: 182px;
     height: 30px;
     line-height: 30px;
     font-size: 14px;
@@ -164,6 +212,7 @@
     float: right;
     cursor: pointer;
     margin-top: 6px;
+    display: none;
 }
 .keywords_list li:hover{
     color: #7168ff;
