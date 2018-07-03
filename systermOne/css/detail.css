@@ -10,6 +10,9 @@
     position: absolute;
     left: 0;
     top: 490px;
+    background: #fff;
+    padding: 0 10px 10px 10px;
+    font-size: 14px;
 }
 .photoBox{
     position: absolute;
@@ -18,4 +21,17 @@
     z-index: 999;
     width: 360px;
     height: auto;
+}
+#tableList thead tr th,#tableList tr td{
+    border-top: none;
+    border-bottom: none;
+}
+.detailList b{
+    font-size: 14px;
+    color: #2e2e2e;
+    border-bottom: 1px solid #bbbbbb;
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
 }
