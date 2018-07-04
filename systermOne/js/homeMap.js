@@ -1,10 +1,10 @@
 var map = new BMap.Map("homeMap");                               // 创建Map实例
-map.centerAndZoom("上海",15);
-map.enableScrollWheelZoom(true);                                //开启鼠标滚轮缩放
-
+var point = new BMap.Point(121.480237,31.236305);                //定义一个中心点
+map.centerAndZoom(point,15);
 var data_info = [
-    [121.477594, 31.239078,"地址：人民广场"],
-    [121.466095, 31.233644,"地址：南京西路"],
+    // [121.477594, 31.239078,"地址：人民广场"],
+    // [121.466095, 31.233644,"地址：南京西路"],
+    [121.387134, 31.336926,"上海十二号线"]
 ];
 function clickRight(map){
     for(var i=0;i<data_info.length;i++) {

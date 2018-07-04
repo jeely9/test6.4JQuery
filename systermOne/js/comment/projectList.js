@@ -2,11 +2,21 @@ var ProjectListA;
 var list = [];
 function ProjectList(option){
     for(var i=0;i<option.length;i++){
-        this.id = option[i].id;
-        this.initial = option[i].initial;
-        this.keyword = option[i].keyword;
-        this.geo = option[i].geo;
-        list.push({id:option[i].id,initial:this.keyword,keyword:this.keyword,geo:option[i].geo});
+        this.ID = option[i].ID;
+        this.Name = option[i].Name;
+        this.CODE = option[i].CODE;
+        this.ProjectTitle = option[i].ProjectTitle;
+        this.AnalysisService = option[i].AnalysisService;
+        this.DBID = option[i].DBID;
+        this.DefaultMapID = option[i].DefaultMapID;
+        this.FileService = option[i].FileService;
+        this.ModuleIDs = option[i].ModuleIDs;
+        this.Remark = option[i].Remark;
+        this.X = option[i].X;
+        this.Y = option[i].Y;
+        list.push({ID:this.ID,Name:this.Name,CODE:this.CODE,ProjectTitle:this.ProjectTitle,
+            AnalysisService:this.AnalysisService,DBID:this.DBID,DefaultMapID:this.DefaultMapID,
+            FileService:this.FileService,ModuleIDs:this.ModuleIDs,Remark:this.Remark,X:this.X,Y:this.Y});
     }
     return list;
 }

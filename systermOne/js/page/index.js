@@ -23,14 +23,15 @@ function keywordSearch(){
         var reg = new RegExp(searchKey, "i"); //忽略大小写匹配搜索框中输入的内容
         $.ajax({
             type: "get",
-            url: "js/project.json",
+            url: ""+host+"/api/project/list",
+            // url: "js/project.json",
             dataType: "json",
             success: function (data) {
                 ProjectListA = new ProjectList(data);
                 var arr = [];
-                for (var i = 0, len = data.length; i < len; i++) {
-                    if (searchKey != "" && (data[i].initial.search(reg) != -1 || data[i].keyword.search(reg) != -1)) {
-                        arr.push("<li class='keyList' id='keyList'>" + data[i].keyword + "</li><span style='display: none;'>"+data[i].geo+"</span><img class='peizhi' data-toggle='modal' data-target='#configModal' src='../../../../testOne/systermOne/img/peizhi.png' alt='配置'>");
+                for (var i = 0, len = ProjectListA.length; i < len; i++) {
+                    if (searchKey != "" && (ProjectListA[i].Name.search(reg) != -1)) {
+                        arr.push("<li class='keyList' id='keyList'>" + ProjectListA[i].Name + "<img class='peizhi' data-toggle='modal' data-target='#configModal' src='../../../../testOne/systermOne/img/peizhi.png' alt='配置'></li><span style='display: none;'>"+ProjectListA[i].X+","+ProjectListA[i].Y+"</span>");
                     }
                 }
                 $(".keywords_list").html(arr).show();
@@ -42,12 +43,18 @@ function keywordSearch(){
                 });
                 $(".keyList").click(function(){
                     var geo = $(this).next("span").text();
+                    console.log(geo);
                     var arr = geo.split(",");
                     for(var i=0;i<arr.length;i++){
-                        var marker = new BMap.Marker(new BMap.Point(arr[0],arr[1]));
-                        map.addOverlay(marker);
-                        // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                        var mctXY = new BMap.Pixel(arr[0],arr[1]);
                     }
+                    var projection2 = map.getMapType().getProjection();
+                    var LngLat = projection2.pointToLngLat(mctXY);
+                    console.log(LngLat);
+                    var marker = new BMap.Marker(LngLat);
+                    map.addOverlay(marker);
+                    map.panTo(new BMap.Point(LngLat.lng,LngLat.lat));
+                    // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
                     //创建信息窗口
                     var title = $(this).text();
                     var sContent ="";
@@ -79,13 +86,15 @@ function keywordSearch(){
 function searchList(){
     $.ajax({
         type: "get",
-        url: "js/project.json",
+        url: ""+host+"/api/project/list",
+        // url: "js/project.json",
         dataType: "json",
         success: function (data) {
-            ProjectListA = new ProjectList(data);
+            var datas = data.data;
+            ProjectListA = new ProjectList(datas);
             var arr = [];
-            for (var i = 0, len = data.length; i < len; i++) {
-                    arr.push("<li class='keyList' id='keyList'>" + data[i].keyword + "<img class='peizhi' data-toggle='modal' data-target='#configModal' src='../../../../testOne/systermOne/img/peizhi.png' alt='配置'></li><span style='display: none;'>"+data[i].geo+"</span>");
+            for (var i = 0, len = ProjectListA.length; i < len; i++) {
+                    arr.push("<li class='keyList' id='keyList'>" + ProjectListA[i].Name + "<img class='peizhi' data-toggle='modal' data-target='#configModal' src='../../../../testOne/systermOne/img/peizhi.png' alt='配置'></li><span style='display: none;'>"+ProjectListA[i].X+","+ProjectListA[i].Y+"</span>");
             }
             $(".keywords_list").html(arr).show();
             $("#testList").setItemHeight();                        //地图上高亮显示
@@ -98,10 +107,14 @@ function searchList(){
                 var geo = $(this).next("span").text();
                 var arr = geo.split(",");
                 for(var i=0;i<arr.length;i++){
-                    var marker = new BMap.Marker(new BMap.Point(arr[0],arr[1]));
-                    map.addOverlay(marker);
-                    // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                    var mctXY = new BMap.Pixel(arr[0],arr[1]);
                 }
+                var projection2 = map.getMapType().getProjection();
+                var LngLat = projection2.pointToLngLat(mctXY);
+                var marker = new BMap.Marker(LngLat);
+                map.addOverlay(marker);
+                // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                map.panTo(new BMap.Point(LngLat.lng,LngLat.lat));
                 //创建信息窗口
                 var title = $(this).text();
                 var sContent ="";
