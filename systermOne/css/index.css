@@ -1,3 +1,20 @@
+::-webkit-scrollbar
+{
+    width: 10px;
+    height: 10px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    background-color: #dccafb;
+}
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    background: -webkit-linear-gradient(left bottom, #7d82f9 , #b984ff); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top right, #7d82f9, #b984ff); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top right, #7d82f9, #b984ff); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to top right, #7d82f9 , #b984ff); /* 标准的语法 */
+}
 .titleGradient{
     background: -webkit-linear-gradient(left bottom, #7d82f9 , #b984ff); /* Safari 5.1 - 6.0 */
     background: -o-linear-gradient(top right, #7d82f9, #b984ff); /* Opera 11.1 - 12.0 */
@@ -290,12 +307,18 @@
 .mapChoose button{
     display: inline-block;
 }
+.modalList{
+    width: 288px;
+    height: 177px;
+    overflow: auto;
+    padding: 14px 0;
+}
 .modalList table{
     background: #f2f2f2;
     border-radius: 6px;
     width: 290px;
     height: 190px;
-    overflow: auto;
+    text-align: center;
 }
 .modal-footer{
     border-top: none;

@@ -13,7 +13,32 @@
 
 
 
+function moduleList(){
+    $.ajax({
+        type: "get",
+        url: ""+host+"/api/project/module",
+        dataType: "json",
+        success: function (data) {
+            var datas = data.data;
+            console.log(datas);
+            $("#modalList").html("");
+            var lists = "";
+            lists += "<tr>";
+            for(var i=0;i<datas.length;i++){
+                lists += '<td><input type="radio"  name="identity"/></td>';
+                lists += '<td>'+datas[i].Name+'</td>';
+                lists += '<td>'+datas[i].CODE+'</td>';
+                lists += '<td>'+datas[i].Remark+'</td>';
+                lists += "</tr>";
+            }
 
+            $("#modalList").html(lists);
+        },
+        error: function(e){
+            console.log(e);
+        }
+    })
+}
 function loadBox(){
     $("#loadBox").load("home.html");
 }
@@ -189,5 +214,6 @@ $(function(){
     outClick();                                         //退出
     searchList();                                       //搜索列表
     keywordSearch();                                   //关键字搜索
-    loadBox();
+    loadBox();                                         //加载页面
+    moduleList();                                       //模块列表
 });
