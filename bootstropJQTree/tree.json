@@ -1,0 +1,99 @@
+{
+    "success": true,
+    "data": [
+        {
+            "ID": 1,
+            "Name_Chs": "地表沉降监测项",
+            "Name_En": "DBCJ",
+            "ParentID": 0,
+            "RefObjID": 1,
+            "Description": "地表沉降监测项",
+            "Domain": "Monitoring",
+            "Chillds": [
+                {
+                    "ID": 4,
+                    "Name_Chs": "一区地表沉降监测组",
+                    "Name_En": "DBCJCZ_1",
+                    "ParentID": 1,
+                    "RefObjID": 4,
+                    "Description": "一区地表沉降监测组",
+                    "Domain": "Monitoring",
+                    "Chillds": null
+                },
+                {
+                    "ID": 5,
+                    "Name_Chs": "二区地表沉降监测组",
+                    "Name_En": "DBCJCZ_2",
+                    "ParentID": 1,
+                    "RefObjID": 4,
+                    "Description": "二区地表沉降监测组",
+                    "Domain": "Monitoring",
+                    "Chillds": null
+                }
+            ]
+        },
+        {
+            "ID": 2,
+            "Name_Chs": "侧墙位移监测项",
+            "Name_En": "CQWY",
+            "ParentID": 0,
+            "RefObjID": 1,
+            "Description": "侧墙位移监测项",
+            "Domain": "Monitoring",
+            "Chillds": [
+                {
+                    "ID": 6,
+                    "Name_Chs": "一区侧墙位移监测组",
+                    "Name_En": "CQWYCZ_1",
+                    "ParentID": 2,
+                    "RefObjID": 4,
+                    "Description": "一区侧墙位移监测组",
+                    "Domain": "Monitoring",
+                    "Chillds": null
+                },
+                {
+                    "ID": 7,
+                    "Name_Chs": "二区侧墙位移监测组",
+                    "Name_En": "CQWYCZ_2",
+                    "ParentID": 2,
+                    "RefObjID": 4,
+                    "Description": "二区侧墙位移监测组",
+                    "Domain": "Monitoring",
+                    "Chillds": null
+                }
+            ]
+        },
+        {
+            "ID": 3,
+            "Name_Chs": "水位监测项",
+            "Name_En": "SW",
+            "ParentID": 0,
+            "RefObjID": 1,
+            "Description": "水位监测项",
+            "Domain": "Monitoring",
+            "Chillds": [
+                {
+                    "ID": 8,
+                    "Name_Chs": "一区水位监测组",
+                    "Name_En": "SWCZ_1",
+                    "ParentID": 3,
+                    "RefObjID": 4,
+                    "Description": "一区水位监测组",
+                    "Domain": "Monitoring",
+                    "Chillds": null
+                },
+                {
+                    "ID": 9,
+                    "Name_Chs": "二区水位监测组",
+                    "Name_En": "SWCZ_2",
+                    "ParentID": 3,
+                    "RefObjID": 4,
+                    "Description": "二区水位监测组",
+                    "Domain": null,
+                    "Chillds": null
+                }
+            ]
+        }
+    ],
+    "error": ""
+}
