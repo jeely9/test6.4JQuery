@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>百度地图和geoserver叠加的图层</title>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=1nCQCnDr3Nt3GKDVeBmKGe2Y"></script>
     <!--<script src="../JS/coordTransform.js"></script>-->
     <style type="text/css">
@@ -70,14 +69,100 @@
                 var moca0 = _getMercator(lonlat);                     //wgs转墨卡托
                 var moca1 = _getMercator(lonlat2);                    //wgs转墨卡托
                 var bbox = [moca0.x+","+moca0.y+","+moca1.x+","+moca1.y];
-                console.log(bbox);
+                // console.log(bbox);
                 var url = 'http://139.196.73.142:8080/geoserver/wms?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&FORMAT=image%2Fpng&' +
                     'TRANSPARENT=true&LAYERS=tongji%3Aenv_bul&WIDTH=256&HEIGHT=256&SRS=EPSG%3A3857&STYLES=&BBOX='
                     + bbox.join(',');
                 return url;
             }
-        }
+        };
+
         map.addTileLayer(tileLayer);
+        function showInfo(e){
+            console.log(e);
+            var tileCoord = e.pixel;
+            // console.log(tileCoord);
+            var x = tileCoord.x;
+            var y = tileCoord.y;
+            //先通过baiduMap API提供的方法将平面坐标转成经纬度坐标
+            var pointConvert = new BaiduPointConvert(map);
+            var lonlat_0 = pointConvert.tileToLngLat(tileCoord);//瓦片左下角坐标；
+            // console.log(lonlat_0);
+            var tileCoord2 = new Object();
+            tileCoord2.x = x + 1;
+            tileCoord2.y = y + 1;
+            var lonlat2_0 = pointConvert.tileToLngLat(tileCoord2);//瓦片右上角坐标；
+            // console.log(lonlat2_0)
+            var lonlat_1= bd09togcj02(lonlat_0.lng, lonlat_0.lat);//百度转gcj
+            var lonlat2_1 = bd09togcj02(lonlat2_0.lng, lonlat2_0.lat);//百度转gcj
+            var lonlat = gcj02towgs84(lonlat_1[0], lonlat_1[1]);//gcj转wgs
+            var lonlat2 = gcj02towgs84(lonlat2_1[0], lonlat2_1[1]);//gcj转wgs
+            var moca0 = _getMercator(lonlat);                     //wgs转墨卡托
+            var moca1 = _getMercator(lonlat2);                    //wgs转墨卡托
+            var BBOX = [moca0.x+","+moca0.y+","+moca1.x+","+moca1.y];
+
+
+
+
+            // var xT = e.point.lng;
+            // var yT = e.point.lat;
+            // console.log(xT,yT);
+            // var Tlonlat_1= bd09togcj02(xT, yT);//百度转gcj
+            // var Tlonlat_2= bd09togcj02((xT+1), (yT+1));//百度转gcj
+            // var lonlat = gcj02towgs84(Tlonlat_1[0], Tlonlat_1[1]);//gcj转wgs
+            // var lonlat_2 = gcj02towgs84(Tlonlat_2[0], Tlonlat_2[1]);//gcj转wgs
+            // var Tmoca0 = _getMercator(lonlat);                     //wgs转墨卡托
+            // var Tmoca1 = _getMercator(lonlat_2);                     //wgs转墨卡托
+            // var BBOX = [Tmoca0.x+","+Tmoca0.y+","+Tmoca1.x+","+Tmoca1.y];
+            // console.log(BBOX);
+            // var BBOX = [13524720.031509058,3669977.6551420474,13524961.015807585,3670218.6394405737];
+            var url = 'http://139.196.73.142:8080/geoserver/tongji/wms?SERVICE=WMS&VERSION=1.1.1&' +
+                'REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=tongji%3Aenv_bul&' +
+                'STYLES&LAYERS=tongji%3Aenv_bul&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=50&Y=50&SRS=EPSG%3A3857&' +
+                'WIDTH=50&HEIGHT=50&' +
+                'BBOX='+ BBOX.join(',');
+            // var url = 'http://139.196.73.142:8080/geoserver/tongji/wms?SERVICE=WMS&VERSION=1.1.1&' +
+            //     'REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=tongji%3Aenv_bul&' +
+            //     'STYLES&LAYERS=tongji%3Aenv_bul&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=50&Y=50&SRS=EPSG%3A3857&' +
+            //     'WIDTH=50&HEIGHT=50&BBOX=13525054.069150583%2C3669348.614508447%2C13525295.053449111%2C3669589.598806973';
+
+            // BBOX=13525234.807374477%2C3669272.0125294905%2C13525355.299523741%2C3669392.504678754
+            $.ajax({
+                type: "get",
+                // url: "http://139.196.73.142:8080/geoserver/tongji/wms",
+                url: url,
+                // data: {
+                //     VERSION: '1.1.1',
+                //     REQUEST: 'GetFeatureInfo',
+                //     LAYERS: 'tongji%3Aenv_bul',
+                //     styles: '',
+                //     TRANSPARENT: 'true',
+                //     SERVICE: 'WMS',
+                //     SRS: 'EPSG%3A3857',
+                //     FEATURE_COUNT: 50,
+                //     bbox: "13524720.031509058,3669977.6551420474,13524961.015807585,3670218.6394405737",
+                //     FORMAT: 'image%2Fpng',
+                //     width: '101',
+                //     height: '101',
+                //     INFO_FORMAT: 'text%2Fhtml',
+                //     X: 50,
+                //     Y: 50,
+                //     QUERY_LAYERS:'tongji%3Aenv_bul'
+                // },
+                // contentType:"text/plain;charset=UTF-8",
+                // dataType: "json",
+                // async: true,
+                // dataType: 'jsonP',
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+
+            });
+        }
+        map.addEventListener("click", showInfo);
     }
     window.onload = function () {
         init();
