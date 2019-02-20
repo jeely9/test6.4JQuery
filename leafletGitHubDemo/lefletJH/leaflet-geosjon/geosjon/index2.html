@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>等值线的生成</title>
+    <link href="leaflet.css" rel="stylesheet" />
+    <style>
+        #map
+        {
+            height: 1000px;
+            width: 800px;
+        }
+    </style>
+    <script src="leaflet.js" ></script>
+    <script src="leaflet.ChineseTmsProviders.js"></script>
+    <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+</head>
+<body>
+<div id="map"></div>
+
+</body>
+<script>
+    var map = L.map('map').setView([29.8219,121.5624], 13);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        id: 'mapbox.light'
+    }).addTo(map);
+    // 创建等值线区域
+    var extent = [0, 30, 20, 50];
+    var cellWidth = 100;
+    var pointGrid = turf.pointGrid(extent, cellWidth, { units: 'miles' });
+
+    for (var i = 0; i < pointGrid.features.length; i++) {
+        pointGrid.features[i].properties.temperature = Math.random() * 10;
+    }
+    console.log(pointGrid.features.length);
+    //等值线的级数
+    var breaks = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    var lines = turf.isolines(pointGrid, breaks, { zProperty: 'temperature' });
+    //设置颜色
+    var myStyle = {
+        "color": "#ff7800",
+        "weight": 5,
+        "opacity": 0.65
+    };
+    //进行平滑处理
+    var _lFeatures = lines.features;
+    for(var i=0;i<_lFeatures.length;i++){
+        var _coords = _lFeatures[i].geometry.coordinates;
+        var _lCoords = [];
+        for(var j=0;j<_coords.length;j++){
+            var _coord = _coords[j];
+            var line = turf.lineString(_coord);
+            var curved = turf.bezierSpline(line);
+            _lCoords.push(curved.geometry.coordinates);
+        }
+        _lFeatures[i].geometry.coordinates = _lCoords;
+    }
+    //geojson数据读取
+    L.geoJSON(lines, {
+        style: myStyle
+    }).addTo(map);
+</script>
+</html>

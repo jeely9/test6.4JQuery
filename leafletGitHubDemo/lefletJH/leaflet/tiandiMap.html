@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>天地图</title>
+    <link rel="stylesheet" href="leaflet.css" />
+    <link rel="stylesheet" href="js/leaflet.groupedlayercontrol.css" />
+    <style type="text/css">
+        #map { height: 700px; }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+</body>
+<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="leaflet.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/leaflet.ChineseTmsProviders.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/leaflet.wms.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/proj4-compressed.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/proj4leaflet.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/leaflet.groupedlayercontrol.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    //创建map对象,设置地图中心和缩放级别
+    // //创建map对象,设置地图中心和缩放级别
+    var normalm = L.tileLayer.chinaProvider('TianDiTu.Normal.Map', {
+            maxZoom: 18,
+            minZoom: 5
+        }),
+        normala = L.tileLayer.chinaProvider('TianDiTu.Normal.Annotion', {
+            maxZoom: 18,
+            minZoom: 5
+        }),
+        imgm = L.tileLayer.chinaProvider('TianDiTu.Satellite.Map', {
+            maxZoom: 18,
+            minZoom: 5
+        }),
+        imga = L.tileLayer.chinaProvider('TianDiTu.Satellite.Annotion', {
+            maxZoom: 18,
+            minZoom: 5
+        });
+
+    var normal = L.layerGroup([normalm, normala]),
+        image = L.layerGroup([imgm, imga]);
+
+    var baseLayers = {
+        "地图": normal,
+        "影像": image,
+    }
+
+    var tiles = L.WMS.tileLayer("http://139.196.73.142:8080/geoserver/wms", {
+        layers: 'tongji:env_bul,tongji:des_sta,tongji:mon_str_set1,tongji:geo_bhl',
+        transparent: true,
+        format: 'image/png'
+    });
+    var map = L.map("map", {
+        center: [31.288163, 121.513007],
+        zoom: 15,
+        layers: [normal,tiles],
+        zoomControl: false
+    });
+   var one= L.WMS.tileLayer("http://139.196.73.142:8080/geoserver/wms", {
+        layers: 'tongji:env_bul',
+        transparent: true,
+        format: 'image/png'
+    });
+    var two = L.WMS.tileLayer("http://139.196.73.142:8080/geoserver/wms", {
+        layers: 'tongji:des_sta',
+        transparent: true,
+        format: 'image/png'
+    });
+    var three= L.WMS.tileLayer("http://139.196.73.142:8080/geoserver/wms", {
+        layers: 'tongji:mon_str_set1',
+        transparent: true,
+        format: 'image/png'
+    });
+    var four = L.WMS.tileLayer("http://139.196.73.142:8080/geoserver/wms", {
+        layers: 'tongji:geo_bhl',
+        transparent: true,
+        format: 'image/png'
+    });
+    var overlayLayers = {
+        "图层":tiles,
+        "env_bul": one,
+        "des_sta": two,
+        "mon_str_set1": three,
+        "geo_bhl": four
+    }
+    L.control.layers(baseLayers, overlayLayers).addTo(map);
+    L.control.zoom({
+        zoomInTitle: '放大',
+        zoomOutTitle: '缩小'
+    }).addTo(map);
+
+//    var groupedOverlays = {
+//        "图层": {
+//            "env_bul": ExampleData.LayerGroups.env_bul,
+//            "des_sta": ExampleData.LayerGroups.des_sta,
+////            "mon_str_set1":'mon_str_set1',
+////            "geo_bhl":'geo_bhl',
+////            "Bing Map":'Bing Map'
+//        }
+//        };
+//
+//        L.control.groupedLayers(tiles, groupedOverlays).addTo(map);
+    // 图层是否选中
+    // $(".layerBox input").change(function(e) {
+    //     var _this=$(this);
+    //     //判断全选按钮是否选中
+    //     if (_this.is(':checked')){//选中时的操作
+    //         $(this).prop("checked",true);
+    //         var layer = $(this).val();
+    //         console.log(layer);
+    //     }else{//未选中时的操作
+    //         $(this).prop('checked',false);
+    //         var layer = "";
+    //         console.log(layer);
+    //     }
+    //     var tiles = L.WMS.tileLayer("http://139.196.73.142:8080/geoserver/wms", {
+    //         layers: layer,
+    //         transparent: true,
+    //         format: 'image/png'
+    //     });
+    //     tiles.addTo(map);
+    // });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //转换常数
+    var x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+    var pi = 3.14159265358979324;
+    var a = 6378245.0;
+    var ee = 0.00669342162296594323;
+
+    function transformLon(x, y) {
+        var ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x));
+        ret += (20.0 * Math.sin(6.0 * x * pi) + 20.0 * Math.sin(2.0 * x * pi)) * 2.0 / 3.0;
+        ret += (20.0 * Math.sin(x * pi) + 40.0 * Math.sin(x / 3.0 * pi)) * 2.0 / 3.0;
+        ret += (150.0 * Math.sin(x / 12.0 * pi) + 300.0 * Math.sin(x / 30.0 * pi)) * 2.0 / 3.0;
+        return ret;
+    };
+
+    function transformLat(x, y) {
+        var ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x));
+        ret += (20.0 * Math.sin(6.0 * x * pi) + 20.0 * Math.sin(2.0 * x * pi)) * 2.0 / 3.0;
+        ret += (20.0 * Math.sin(y * pi) + 40.0 * Math.sin(y / 3.0 * pi)) * 2.0 / 3.0;
+        ret += (160.0 * Math.sin(y / 12.0 * pi) + 320 * Math.sin(y * pi / 30.0)) * 2.0 / 3.0;
+        return ret;
+    }
+
+    function outOfChina(lat, lon) {
+        if (lon < 72.004 || lon > 137.8347)
+            return true;
+        if (lat < 0.8293 || lat > 55.8271)
+            return true;
+        return false;
+    }
+    /*
+     * WGS-84：是国际标准，GPS坐标（Google Earth使用、或者GPS模块、天地图）
+     * GCJ-02：中国坐标偏移标准，Google Map、高德、腾讯使用
+     * BD-09：百度坐标偏移标准，Baidu Map使用
+    */
+
+    /**
+     * wgLat 纬度
+     * wgLon 经度
+     * WGS-84 到 GCJ-02 的转换（即 GPS 加偏）
+     * */
+    function wgs_gcj_encrypts(wgLat, wgLon) {
+        var point={};
+        if (outOfChina(wgLat, wgLon)) {
+            point.lat=wgLat;
+            point.lng=wgLon;
+            return point;
+        }
+        var dLat = transformLat(wgLon - 105.0, wgLat - 35.0);
+        var dLon = transformLon(wgLon - 105.0, wgLat - 35.0);
+        var radLat = wgLat / 180.0 * pi;
+        var magic = Math.sin(radLat);
+        magic = 1 - ee * magic * magic;
+        var sqrtMagic = Math.sqrt(magic);
+        dLat = (dLat * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * pi);
+        dLon = (dLon * 180.0) / (a / sqrtMagic * Math.cos(radLat) * pi);
+        var lat = wgLat + dLat;
+        var lon = wgLon + dLon;
+        point.lat=lat;
+        point.lon=lon;
+        return point;
+    };
+
+
+
+
+
+
+
+
+
+    // function Pixel2LatLng(pixel) {
+    //     var scale = Math.pow(2, GlobalMap.getZoom());
+    //     var proj = map.getProjection();
+    //     var bounds = map.getBounds();
+    //     var nw = proj.fromLatLngToPoint(new google.maps.LatLng(bounds.getNorthEast().lat(), bounds.getSouthWest().lng()));
+    //     var point = new google.maps.Point();
+    //     point.x = pixel.x / scale + nw.x;
+    //     point.y = pixel.y / scale + nw.y;
+    //
+    //     return proj.fromPointToLatLng(point);
+    // }
+    //GeoJSON layer (UTM15)
+    proj4.defs('EPSG:3857', '+proj=utm +zone=15 +ellps=GRS80 +datum=NAD83 +units=m +no_defs');
+
+    var geojson = {
+        'type': 'Feature',
+        'geometry': {
+            'type': 'Point',
+            'coordinates': [2576032, 12696076],
+        },
+        'properties': {
+            'name': 'University of Minnesota'
+        },
+        'crs': {
+            'type': 'name',
+            'properties': {
+                'name': 'urn:ogc:def:crs:EPSG::3857'
+            }
+        }
+    };
+
+    L.Proj.geoJson(geojson, {
+        'pointToLayer': function(feature, latlng) {
+            console.log(latlng);
+            return L.marker(latlng).bindPopup(feature.properties.name);
+        }
+    }).addTo(map);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // var source = L.WMS.Source.extend({
+    //     'ajax': function(url, callback) {
+    //         $.ajax("http://139.196.73.142:8080/geoserver/wms", {
+    //             'context': this,
+    //             'success': function(result) {
+    //                 var x = callback.call(this, result);
+    //                 console.log(x);
+    //             }
+    //         });
+    //     },
+    //     'showFeatureInfo': function(latlng, info) {
+    //         $('.output').html(info);
+    //     }
+    // }
+    // );
+    // source.addSubLayer('tongji:env_bul');
+    // source.addTo(map);
+
+    // Opacity slider
+    // var slider = L.DomUtil.get('range-' + div);
+    // L.DomEvent.addListener(slider, 'change', function() {
+    //     source.setOpacity(this.value);
+    // });
+    // var options = {'transparent': true};
+    // var source = L.WMS.source("http://example.com/mapserv", options);
+    // source.addSubLayer('layer1');
+    // source.addTo(map);
+</script>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="leaflet.css" />
+    <link rel="stylesheet" href="js/leaflet.groupedlayercontrol.css" />
+    <style type="text/css">
+        #homeMap { height: 700px; }
+    </style>
+</head>
+<body>
+<div id="homeMap"></div>
+</body>
+<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="leaflet.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/leaflet.ChineseTmsProviders.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/leaflet.wms.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/proj4-compressed.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/proj4leaflet.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/leaflet.groupedlayercontrol.js" type="text/javascript" charset="utf-8"></script>
+<script src="leaflet-tileLayerPixelFilter.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    /**
+     * 智图地图内容
+     */
+    var normalm1 = L.tileLayer.chinaProvider('Geoq.Normal.Map', {
+        maxZoom: 18,
+        minZoom: 5
+    });
+    var normalm2 = L.tileLayer.chinaProvider('Geoq.Normal.Color', {
+        maxZoom: 18,
+        minZoom: 5
+    });
+    var normalm3 = L.tileLayer.chinaProvider('Geoq.Normal.PurplishBlue', {
+        maxZoom: 18,
+        minZoom: 5
+    });
+    var normalm4 = L.tileLayer.chinaProvider('Geoq.Normal.Gray', {
+        maxZoom: 18,
+        minZoom: 5
+    });
+    var normalm5 = L.tileLayer.chinaProvider('Geoq.Normal.Warm', {
+        maxZoom: 18,
+        minZoom: 5
+    });
+    var normalm6 = L.tileLayer.chinaProvider('Geoq.Normal.Cold', {
+        maxZoom: 18,
+        minZoom: 5
+    });
+    /**
+     * 天地图内容
+     */
+    var normalm = L.tileLayer.chinaProvider('TianDiTu.Normal.Map', {
+            maxZoom: 18,
+            minZoom: 5
+        }),
+        normala = L.tileLayer.chinaProvider('TianDiTu.Normal.Annotion', {
+            maxZoom: 18,
+            minZoom: 5
+        }),
+        imgm = L.tileLayer.chinaProvider('TianDiTu.Satellite.Map', {
+            maxZoom: 18,
+            minZoom: 5
+        }),
+        imga = L.tileLayer.chinaProvider('TianDiTu.Satellite.Annotion', {
+            maxZoom: 18,
+            minZoom: 5
+        });
+
+    var normal = L.layerGroup([normalm, normala]),
+        image = L.layerGroup([imgm, imga]);
+    /**
+     * 谷歌
+     */
+    var normalMap = L.tileLayer.chinaProvider('Google.Normal.Map', {
+            maxZoom: 18,
+            minZoom: 5
+        }),
+        satelliteMap = L.tileLayer.chinaProvider('Google.Satellite.Map', {
+            maxZoom: 18,
+            minZoom: 5
+        });
+    /**
+     * 高德地图
+     */
+    var Gaode = L.tileLayer.chinaProvider('GaoDe.Normal.Map', {
+        maxZoom: 18,
+        minZoom: 5
+    });
+    var Gaodimgem = L.tileLayer.chinaProvider('GaoDe.Satellite.Map', {
+        maxZoom: 18,
+        minZoom: 5
+    });
+    var Gaodimga = L.tileLayer.chinaProvider('GaoDe.Satellite.Annotion', {
+        maxZoom: 18,
+        minZoom: 5
+    });
+    var Gaodimage = L.layerGroup([Gaodimgem, Gaodimga]);
+
+
+
+    var baseLayers = {
+        "智图地图": normalm1,
+        // "智图多彩": normalm2,
+        "智图午夜蓝": normalm3,
+        "智图灰色": normalm4,
+        "智图暖色": normalm5,
+        // "智图冷色": normalm6,
+        // "天地图": normal,
+        // "天地图影像": image,
+        // "谷歌地图": normalMap,
+        // "谷歌影像": satelliteMap,
+        // "高德地图": Gaode,
+        // "高德影像": Gaodimage,
+
+    }
+
+    var map = L.map("homeMap", {
+        center: [31.288163, 121.513007],
+        zoom: 15,
+        layers: [normalm3],
+        zoomControl: false
+    });
+
+    L.control.layers(baseLayers, null).addTo(map);
+    L.control.zoom({
+        zoomInTitle: '放大',
+        zoomOutTitle: '缩小'
+    }).addTo(map);
+
+
+
+    //创建map对象,设置地图中心和缩放级别
+    // var normalm = L.tileLayer.chinaProvider('TianDiTu.Normal.Map', {
+    //         maxZoom: 18,
+    //         minZoom: 5
+    //     }),
+    //     normala = L.tileLayer.chinaProvider('TianDiTu.Normal.Annotion', {
+    //         maxZoom: 18,
+    //         minZoom: 5
+    //     }),
+    //     imgm = L.tileLayer.chinaProvider('TianDiTu.Satellite.Map', {
+    //         maxZoom: 18,
+    //         minZoom: 5
+    //     }),
+    //     imga = L.tileLayer.chinaProvider('TianDiTu.Satellite.Annotion', {
+    //         maxZoom: 18,
+    //         minZoom: 5
+    //     });
+    //
+    // var normal = L.layerGroup([normalm, normala]),
+    //     image = L.layerGroup([imgm, imga]);
+    // var normalm3 = L.tileLayer.chinaProvider('Geoq.Normal.PurplishBlue', {
+    //     maxZoom: 18,
+    //     minZoom: 5
+    // });
+    // var baseLayers = {
+    //     "地图": normal,
+    //     "影像": image,
+    //     "午夜蓝":normalm3
+    // }
+    //
+    // var overlayLayers = {
+    //
+    // }
+    //
+    // var map = L.map("homeMap", {
+    //     center: [31.288163, 121.513007],
+    //     zoom: 15,
+    //     crs: L.CRS.EPSG4326,
+    //     // layers: [normal],
+    //     zoomControl: false,
+    //     editable: true,
+    // });
+    // // var filtered = L.tileLayerPixelFilter('https://mapbox-or-something/tiles/{z}/{x}/{y}.png', {
+    // //     matchRGBA: [ 0,  0,  0, 255  ],
+    // //     missRGBA:  [ 255, 255, 255, 64 ],
+    // //     pixelCodes: [ [255, 0, 0] ]
+    // // }).addTo(map);
+    // // L.tileLayer('http://t1.tianditu.com/vec_c/wmts?layer=vec&style=default&tilematrixset=c&Service=WMTS&Request=GetTile&Version=1.0.0&Format=tiles&TileMatrix={z}&TileCol={x}&TileRow={y}', {
+    // L.tileLayer('http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetColor/MapServer/tile/{z}/{y}/{x}',{
+    //     maxZoom: 20,
+    //     tileSize: 256,
+    //     zoomOffset: 1,
+    // }).addTo(map);
+    // L.control.layers(baseLayers, overlayLayers).addTo(map);
+    // L.control.zoom({
+    //     zoomInTitle: '放大',
+    //     zoomOutTitle: '缩小'
+    // }).addTo(map);
+</script>
+</html>

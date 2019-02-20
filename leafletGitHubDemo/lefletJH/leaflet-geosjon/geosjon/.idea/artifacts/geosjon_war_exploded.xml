@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="geosjon:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/geosjon_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="geosjon/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="geosjon" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

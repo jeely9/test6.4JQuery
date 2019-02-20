@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="leaflet.css" />
+    <link rel="stylesheet" href="js/leaflet.groupedlayercontrol.css" />
+</head>
+<body>
+<div id='map' style="height: 300px;"></div>
+
+
+
+</body>
+<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="leaflet.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/leaflet.ChineseTmsProviders.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    var normalm = L.tileLayer.chinaProvider('GaoDe.Normal.Map', {
+        maxZoom : 18,
+        minZoom : 5
+    });
+    var imgm = L.tileLayer.chinaProvider('GaoDe.Satellite.Map', {
+        maxZoom : 18,
+        minZoom : 5
+    });
+    var imga = L.tileLayer.chinaProvider('GaoDe.Satellite.Annotion', {
+        maxZoom : 18,
+        minZoom : 5
+    });
+
+    //layerGroup用于将几个图层组合成一个。如果将其添加到地图中，任何添加或移除的图层将在地图上添加/删除。扩展层。
+    var normal = L.layerGroup([ normalm ]), image = L.layerGroup([ imgm, imga ]);
+
+    var baseLayers = {
+        "地图" : normal,
+        "影像" : image,
+    }
+
+    var map = L.map("map", {
+        center : [ 31.59, 120.29 ],
+        zoom : 12,
+        layers : [ normal ],
+        zoomControl : false
+    });
+
+    L.control.layers(baseLayers, null).addTo(map);
+    L.control.zoom({
+        zoomInTitle : '放大',
+        zoomOutTitle : '缩小'
+    }).addTo(map);
+    //点击地图弹出坐标位置
+    function onMapClick(e) {
+        alert("You clicked the map at " + e.latlng);
+    }
+    map.on('click', onMapClick);
+
+    var popup = L.popup();
+
+    function onMapClick(e) {
+        popup.setLatLng(e.latlng).setContent(
+            "You clicked the map at " + e.latlng.toString()).openOn(map);
+    }
+
+    map.on('click', onMapClick);
+
+    //点坐标
+    var marker = L.marker([31.59623, 120.28999]).addTo(map);
+    //弹窗信息
+    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+
+    //经纬度事件弹窗
+    var lng = null, lat = null;
+    var position = function(lng,lat){
+        L.marker([lng, lat]).addTo(map).bindPopup("当前经纬度：["+lng+","+lat+"]"+"<br>"
+            +"<button onclick=" + "\"" +"detail("+lng+","+lat+")" +"\""+">地点详情</button>").openPopup();
+
+    }
+    //異步查詢指定經緯度信息
+    function detail(lng,lat){
+        //经纬度查询信息
+        L.marker([lng, lat]).addTo(map).bindPopup("名称:"+"国际新城"+"<br>"
+            +"<b>地点:"+"无锡"+"</b>"+"<br>"
+            +"<b>联系电话:"+"12306"+"</b>"+"<br>"
+            +"<button onclick=" + "\"" +"position("+lng+","+lat+")" +"\""+">详情</button>").openPopup();
+        alert("異步查詢指定經緯度信息");
+    }
+    //異步獲取標記點
+    $(function(){
+
+        var markerArr = [
+            { title: "国际新城", point: "31.62591, 120.2821", address: "无锡", tel: "12306" },
+            { title: "红卫村", point: "31.6224, 120.17052", address: "无锡 ", tel: "18500000000" },
+            { title: "沪宜高速", point: "31.58468, 120.14683", address: "无锡", tel: "18500000000" },
+            { title: "板桥", point: "31.60895, 120.40466", address: "无锡", tel: "18500000000" }
+        ]
+        //异步获取数值
+        //...
+
+
+        for (var i = 0; i < markerArr.length; i++) {
+            //获取经纬度
+            var lng = markerArr[i].point.split(",")[0];
+            var lat = markerArr[i].point.split(",")[1];
+            //生成新的标记点
+            L.marker([lng,lat]).addTo(map).bindPopup("<b>名称:"+markerArr[i].title+"</b>"+"<br>"
+                +"<b>地点:"+markerArr[i].address+"</b>"+"<br>"
+                +"<b>联系电话:"+markerArr[i].tel+"</b>"+"<br>"
+                +"<b><button onclick=" + "\"" +"position("+lng+","+lat+")" +"\""+">当前经纬度</button></b>").openPopup();
+
+        }
+    });
+</script>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>天地图</title>
+    <link rel="stylesheet" href="leaflet.css" />
+    <link rel="stylesheet" href="js/leaflet.groupedlayercontrol.css" />
+    <style type="text/css">
+        #map { height: 700px; }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+</body>
+<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="leaflet.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/leaflet.ChineseTmsProviders.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    //创建map对象,设置地图中心和缩放级别
+    var normalm = L.tileLayer('http://t1.tianditu.com/vec_c/wmts?layer=vec&style=default&tilematrixset=c&Service=WMTS&Request=GetTile&Version=1.0.0&Format=tiles&TileMatrix={z}&TileCol={x}&TileRow={y}', {
+            maxZoom: 18,
+            tileSize: 256,
+            zoomOffset: 1,
+        }),
+        normala = L.tileLayer('http://t1.tianditu.com/cva_c/wmts?layer=cva&style=default&tilematrixset=c&Service=WMTS&Request=GetTile&Version=1.0.0&Format=tiles&TileMatrix={z}&TileCol={x}&TileRow={y}', {
+            maxZoom: 18,
+            tileSize: 256,
+            zoomOffset: 1
+        }),
+        imgm = L.tileLayer('http://t1.tianditu.com/img_c/wmts?layer=img&style=default&tilematrixset=c&Service=WMTS&Request=GetTile&Version=1.0.0&Format=tiles&TileMatrix={z}&TileCol={x}&TileRow={y}', {
+            maxZoom: 18,
+            tileSize: 256,
+            zoomOffset: 1
+        })
+
+    var normal = L.layerGroup([normalm, normala]),
+        image = L.layerGroup([imgm]);
+    var baseLayers = {
+        "地图": normal,
+        "影像": image,
+    }
+
+    var overlayLayers = {
+
+    }
+
+    var map = L.map("map", {
+        center: [30.816406, 100.019531],
+        zoom: 4,
+        crs: L.CRS.EPSG4326,
+        layers: [normal],
+        zoomControl: false,
+        editable: true,
+    });
+    L.control.layers(baseLayers, overlayLayers).addTo(map);
+    L.control.zoom({
+        zoomInTitle: '放大',
+        zoomOutTitle: '缩小'
+    }).addTo(map);
+
+    var result = [];
+    result.push({lat:33.644939,lng:113.97508},{lat:36.725499,lng:108.308713});
+    console.log(result);
+    var layers=[];
+    for(var i = 0;i< result.length;i++){
+        var layer = new L.marker([ result[i].lat, result[i].lng ]);
+        layers.push(layer);
+        // layer.bindPopup("<div class='infoBox'><h4 class='infoTitle'>"+ "title" +"</h4>" +
+        //     "<p class='process'>工程进度:</p>" +"<p class='mointor'>监测状态:</p>"+
+        //     "</div>").openPopup();
+    }
+    var myGroup=L.layerGroup(layers);
+    myGroup.bindPopup("<div class='infoBox'><h4 class='infoTitle'>"+ "title" +"</h4>" +
+        "<p class='process'>工程进度:</p>" +"<p class='mointor'>监测状态:</p>"+
+        "</div>").openPopup();
+    map.addLayer(myGroup);
+
+
+</script>
+</html>
